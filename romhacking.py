@@ -71,7 +71,7 @@ def add(hack):
 
 def update():
     if not os.path.exists(args.config):
-        print("Error, config.json does not exist! First inititializing it with --add")
+        print("Error, config.json does not exist! First initialize it with --add")
         exit(1)
 
     for patch in patches_dict:
