@@ -9,6 +9,11 @@ import requests
 import signal
 import sys
 
+try:
+    from github import Github
+except:
+    pass
+
 
 def get_romhacking(url):
     html = requests.get(url)
@@ -80,10 +85,34 @@ def update():
             patches_dict[patch]["id"]
         _, _, latest = get_romhacking(url)
         if local != latest:
-            print("Outdated: " + patch)
-            print("Local Version: " + local)
-            print("Latest Version: " + latest)
-            print("URL: " + url + "\n")
+            if args.update_github:
+                github(patch, local, latest, url)
+            else:
+                print("Outdated: " + patch)
+                print("Local Version: " + local)
+                print("Latest Version: " + latest)
+                print("URL: " + url + "\n")
+
+
+def github(romhack_name, local_version, latest_version, url):
+    github_token = os.environ['GITHUB_TOKEN']
+    github_repo = os.environ['GITHUB_REPOSITORY']
+    github = Github(github_token)
+    repo = github.get_repo(github_repo)
+
+    def github_issue_exists(title):
+        open_issues = repo.get_issues(state='open')
+        for issue in open_issues:
+            if issue.title == title and issue.user.login == "github-actions[bot]":
+                return True
+        return False
+
+    issue_title = "Update %s" % (romhack_name)
+    if not github_issue_exists(issue_title):
+        issue = repo.create_issue(
+            issue_title, "%s version %s available %s" % (romhack_name, latest_version, url))
+        print("%s version %s available (local version: %s) %s - Created issue %d" %
+              (romhack_name, latest_version, local_version, url, issue.number))
 
 
 signal.signal(signal.SIGINT, sigint_handler)
@@ -98,6 +127,8 @@ if __name__ == "__main__":
     parser.add_argument("--config")
     parser.add_argument("--debug", action='store_true')
     parser.add_argument("--update", action='store_true')
+    parser.add_argument("--update-github", action='store_true')
+
     args = parser.parse_args()
 
     # Read json to dictionary
@@ -110,5 +141,5 @@ if __name__ == "__main__":
     if args.add:
         add(args.add)
 
-    if args.update:
+    if args.update or args.update_github:
         update()
