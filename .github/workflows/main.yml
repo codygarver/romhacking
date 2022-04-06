@@ -1,0 +1,23 @@
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: "0 0/12 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Dependencies
+        run: |
+          apt update
+          python3-github
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Verify that we are shipping the latest version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 ./romhacking.py --config config.json --update-github
