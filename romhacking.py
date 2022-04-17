@@ -137,7 +137,8 @@ def tests():
     for patch in patches_dict:
         for key in patches_dict[patch]:
             if not patches_dict[patch][key]:
-                print("Missing " + key + ": " + patch)
+                print("Missing " + key + ": " + patch +
+                      " (" + patches_dict[patch]["id"] + ")")
                 fail = True
 
     if fail:
