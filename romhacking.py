@@ -141,6 +141,11 @@ def tests():
                       " (" + patches_dict[patch]["id"] + ")")
                 fail = True
 
+        if patches_dict[patch]["filename"]:
+            if not os.path.exists("patches/" + patches_dict[patch]["filename"]):
+                print("Missing patch file: " + patches_dict[patch]["filename"])
+                fail = True
+
     if fail:
         exit(1)
 
