@@ -10,21 +10,21 @@
         "filename": "",
         "id": "3764",
         "platform": "gba",
-        "sha1": "",
+        "sha1": "F47870D25665588D19B75E90D0BD32A759E64918",
         "version": "1.1"
     },
     "Castlevania: Harmony of Dissonance - NoGlo": {
         "filename": "",
         "id": "677",
         "platform": "gba",
-        "sha1": "",
+        "sha1": "B90DA0D9BE0B3A0893CD9E2C399056BCF9579E21",
         "version": "1.1"
     },
     "Castlevania: Improved Controls": {
         "filename": "",
         "id": "3867",
         "platform": "nes",
-        "sha1": "",
+        "sha1": "A31B8BD5B370A9103343C866F3C2B2998E889341",
         "version": "3.1"
     },
     "Final Fantasy I DoS Maeson": {
@@ -45,14 +45,14 @@
         "filename": "",
         "id": "563",
         "platform": "gba",
-        "sha1": "",
+        "sha1": "4FC4BC7C1C3ABE9D2F9C59A3AE4172B5CB57BD2C",
         "version": "3.0a"
     },
     "Final Fantasy VI - Sound Restoration hack and few framerate drop": {
         "filename": "",
         "id": "657",
         "platform": "gba",
-        "sha1": "",
+        "sha1": "C5B27ED0870EA64E6A001C5BC367F76571ACE973",
         "version": "2.1"
     },
     "Galaga & Galaxian DX": {
@@ -87,14 +87,14 @@
         "filename": "Macross_Scrambled Valkyrie - Overtech Edition v1.1.ips",
         "id": "4552",
         "platform": "snes",
-        "sha1": "",
+        "sha1": "459A727AEEB013CD1B63F54D4A2355C2F0A1999F",
         "version": "1.1"
     },
     "Metroid + Saving": {
         "filename": "",
         "id": "1186",
         "platform": "nes",
-        "sha1": "",
+        "sha1": "9901E0B53828475CD77B4B684E0590252CB762D8",
         "version": "0.3"
     },
     "Metroid II - EJRTQ Colorization": {
@@ -122,14 +122,7 @@
         "filename": "pokegold97_v5.0.ips",
         "id": "5522",
         "platform": "gb",
-        "sha1": "",
-        "version": "5.0a"
-    },
-    "Pokemon Silver 97: Reforged": {
-        "filename": "pokesilver97_v5.0.ips",
-        "id": "5522",
-        "platform": "gb",
-        "sha1": "",
+        "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
         "version": "5.0a"
     },
     "Pokemon Perfect Crystal (2020 Update)": {
@@ -139,11 +132,18 @@
         "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
         "version": "1.0"
     },
+    "Pokemon Silver 97: Reforged": {
+        "filename": "pokesilver97_v5.0.ips",
+        "id": "5522",
+        "platform": "gb",
+        "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
+        "version": "5.0a"
+    },
     "Super Ghouls'n Ghosts Restoration": {
         "filename": "",
         "id": "3473",
         "platform": "snes",
-        "sha1": "",
+        "sha1": "F12280B13EEA88CA03D700B75CF3C13A0E13F3BC",
         "version": "Final"
     },
     "Super Mario Land 2 DX": {
@@ -157,7 +157,7 @@
         "filename": "",
         "id": "4477",
         "platform": "gb",
-        "sha1": "",
+        "sha1": "3A4DDB39B234A67FFB361EE7ABC3D23E0A8B1C89",
         "version": "1.0"
     },
     "Wario Land 2 - Enhanced Graphics": {
