@@ -7,10 +7,10 @@
         "version": "7.1"
     },
     "Breath of Fire - Sound Restoration": {
-        "filename": "",
+        "filename": "bfire_sound_restoration_1.1_us.ips",
         "id": "3764",
         "platform": "gba",
-        "sha1": "F47870D25665588D19B75E90D0BD32A759E64918",
+        "sha1": "04C15F2B2E7C504F40B97E3A30F2CD591BC7AEF8",
         "version": "1.1"
     },
     "Castlevania: Harmony of Dissonance - NoGlo": {
@@ -52,7 +52,7 @@
         "filename": "",
         "id": "657",
         "platform": "gba",
-        "sha1": "C5B27ED0870EA64E6A001C5BC367F76571ACE973",
+        "sha1": "E9A2A58BC56ACE26CB56D0CF5CDAD1A10AA5DEDF",
         "version": "2.1"
     },
     "Galaga & Galaxian DX": {
@@ -91,14 +91,14 @@
         "version": "1.1"
     },
     "Metroid + Saving": {
-        "filename": "",
+        "filename": "Metroid Plus.ips",
         "id": "1186",
         "platform": "nes",
         "sha1": "9901E0B53828475CD77B4B684E0590252CB762D8",
         "version": "0.3"
     },
     "Metroid II - EJRTQ Colorization": {
-        "filename": "",
+        "filename": "metroid ii - color (ejrtq) v1.3.ips",
         "id": "4388",
         "platform": "gb",
         "sha1": "74A2FAD86B9A4C013149B1E214BC4600EFB1066D",
@@ -140,7 +140,7 @@
         "version": "5.0a"
     },
     "Super Ghouls'n Ghosts Restoration": {
-        "filename": "",
+        "filename": "Super Ghouls'n Ghosts Restoration.ips",
         "id": "3473",
         "platform": "snes",
         "sha1": "F12280B13EEA88CA03D700B75CF3C13A0E13F3BC",
@@ -154,7 +154,7 @@
         "version": "1.8.1"
     },
     "Super Mario Land DX": {
-        "filename": "",
+        "filename": "smldx.ips",
         "id": "4477",
         "platform": "gb",
         "sha1": "3A4DDB39B234A67FFB361EE7ABC3D23E0A8B1C89",
