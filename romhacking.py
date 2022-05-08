@@ -44,35 +44,63 @@ def get_romhacking(url):
         cols = row.find_all("td")
         rom_info = rom_info + [cols[0].text.strip()]
 
-    if not rom_info or len(rom_info) != 12:
+    category = re.search("hacks|translations", url).group()
+
+    if not category or not rom_info:
         print("Error: failed to fetch rom info for " + url)
         exit(1)
 
+    if args.debug:
+        print(rom_info)
+
     title = soup.find("meta", property="og:title")
     name = title["content"]
-    platform = rom_info[3].lower()
-    version = rom_info[7]
 
-    return name, platform, version, sha1
+    id = re.search(r'\d+', url).group()
+
+    def get_platform(platform):
+        if platform == "super nintendo":
+            platform = "snes"
+        elif platform == "nintendo entertainment system":
+            platform = "nes"
+
+        return platform
+
+    length_error = "Error: rom info too short, bad page?"
+
+    if category == "hacks":
+        if len(rom_info) != 12:
+            print(length_error)
+            exit(1)
+
+        modified = rom_info[11]
+        platform = get_platform(rom_info[3].lower())
+        version = rom_info[7]
+
+    if category == "translations":
+        if len(rom_info) != 14:
+            print(length_error)
+            exit(1)
+
+        modified = rom_info[13]
+        platform = get_platform(rom_info[4].lower())
+        version = rom_info[9]
+
+    return name, id, modified, platform, version, sha1, category
 
 
 def sigint_handler(signal, frame):
     sys.exit(0)
 
 
-def add(hack):
-    if hack.isnumeric():
-        id = hack
-        url = "https://www.romhacking.net/hacks/" + hack
-    else:
-        id = re.search(r'\d+', hack).group()
-        url = hack
-
-    name, platform, version, sha1 = get_romhacking(url)
+def add(url):
+    name, id, modified, platform, version, sha1, category = get_romhacking(url)
 
     patches_dict.update({name: {
+        "category": category,
         "filename": "",
         "id": id,
+        "modified": modified,
         "platform": platform,
         "sha1": sha1.upper(),
         "version": version
@@ -93,22 +121,26 @@ def update():
         exit(1)
 
     for patch in patches_dict:
-        local = patches_dict[patch]["version"]
-        url = "https://www.romhacking.net/hacks/" + patches_dict[patch]["id"]
-        _, _, latest, _ = get_romhacking(url)
-        if local != latest:
+        local_version = patches_dict[patch]["version"]
+        local_date = patches_dict[patch]["modified"]
+        url = "https://www.romhacking.net/" + \
+            patches_dict[patch]["category"] + "/" + patches_dict[patch]["id"]
+        _, _, latest_date, _, latest_version, _, _ = get_romhacking(url)
+        if local_version != latest_version or local_date != latest_date:
             if args.update_github:
-                github(patch, local, latest, url)
+                github(patch, local_version, latest_version, url)
             else:
                 print("Outdated: " + patch)
-                print("Local Version: " + local)
-                print("Latest Version: " + latest)
+                print("Local Version: " + local_version)
+                print("Latest Version: " + latest_version)
+                print("Local Date: " + local_date)
+                print("Latest Date: " + latest_date)
                 print("URL: " + url + "\n")
 
 
-def github(romhack_name, local_version, latest_version, url):
-    github_token = os.environ['GITHUB_TOKEN']
+def github(romhack_name, local_version, latest_version, latest_date, url):
     github_repo = os.environ['GITHUB_REPOSITORY']
+    github_token = os.environ['GITHUB_TOKEN']
     github = Github(github_token)
     repo = github.get_repo(github_repo)
 
@@ -122,7 +154,7 @@ def github(romhack_name, local_version, latest_version, url):
     issue_title = "Update %s" % (romhack_name)
     if not github_issue_exists(issue_title):
         issue = repo.create_issue(
-            issue_title, "%s version %s available %s" % (romhack_name, latest_version, url))
+            issue_title, "%s version %s available %s, updated %s" % (romhack_name, latest_version, url, latest_date))
         print("%s version %s available (local version: %s) %s - Created issue %d" %
               (romhack_name, latest_version, local_version, url, issue.number))
 
