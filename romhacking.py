@@ -129,7 +129,7 @@ def update():
         _, _, latest_date, _, latest_version, _, _ = get_romhacking(url)
         if local_version != latest_version or local_date != latest_date:
             if args.update_github:
-                github(patch, local_version, latest_version, url)
+                github(patch, local_version, latest_version, latest_date, url)
             else:
                 print("Outdated: " + patch)
                 print("Local Version: " + local_version)
