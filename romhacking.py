@@ -59,6 +59,7 @@ def get_romhacking(url):
     id = re.search(r'\d+', url).group()
 
     def get_platform(platform):
+        platform = platform.lower()
         if platform == "super nintendo":
             platform = "snes"
         elif platform == "nintendo entertainment system":
@@ -74,7 +75,7 @@ def get_romhacking(url):
             exit(1)
 
         modified = rom_info[11]
-        platform = get_platform(rom_info[3].lower())
+        platform = get_platform(rom_info[3])
         version = rom_info[7]
 
     if category == "translations":
@@ -83,7 +84,7 @@ def get_romhacking(url):
             exit(1)
 
         modified = rom_info[13]
-        platform = get_platform(rom_info[4].lower())
+        platform = get_platform(rom_info[4])
         version = rom_info[9]
 
     return name, id, modified, platform, version, sha1, category
