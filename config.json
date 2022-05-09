@@ -1,168 +1,216 @@
 {
     "Akumajou Densetsu - Localization & Title Screen Redone": {
+        "category": "hacks",
         "filename": "Akuden - Logotrans (New Alucard) v7.ips",
         "id": "1983",
+        "modified": "10 November 2017",
         "platform": "nes",
         "sha1": "A0F3B31D4E3B0D2CA2E8A34F91F14AD99A5AD11F",
         "version": "7.1"
     },
     "Breath of Fire - Sound Restoration": {
+        "category": "hacks",
         "filename": "bfire_sound_restoration_1.1_us.ips",
         "id": "3764",
+        "modified": "16 February 2020",
         "platform": "gba",
         "sha1": "04C15F2B2E7C504F40B97E3A30F2CD591BC7AEF8",
         "version": "1.1"
     },
     "Castlevania: Harmony of Dissonance - NoGlo": {
+        "category": "hacks",
         "filename": "cvhod_noglo_u.ips",
         "id": "677",
+        "modified": "17 January 2016",
         "platform": "gba",
         "sha1": "B90DA0D9BE0B3A0893CD9E2C399056BCF9579E21",
         "version": "1.1"
     },
     "Castlevania: Improved Controls": {
+        "category": "hacks",
         "filename": "",
         "id": "3867",
+        "modified": "28 February 2021",
         "platform": "nes",
         "sha1": "A31B8BD5B370A9103343C866F3C2B2998E889341",
         "version": "3.1"
     },
     "Final Fantasy I DoS Maeson": {
+        "category": "hacks",
         "filename": "FF1 DoS Maeson 1.3a - Higher MP 1-4.ips",
         "id": "6244",
+        "modified": "23 February 2022",
         "platform": "gba",
         "sha1": "6472695D69661490F78245E2982E1E676C080BE7",
         "version": "1.3a"
     },
     "Final Fantasy IV - Sound Restoration hack": {
+        "category": "hacks",
         "filename": "ff4_sound_restore_v13.ips",
         "id": "969",
+        "modified": "07 November 2015",
         "platform": "gba",
         "sha1": "B09D50D782B184C8641AEA6DD904AE46C3CC72E6",
         "version": "1.3"
     },
     "Final Fantasy V - Sound restoration and no framerate drop": {
+        "category": "hacks",
         "filename": "",
         "id": "563",
+        "modified": "07 November 2015",
         "platform": "gba",
         "sha1": "4FC4BC7C1C3ABE9D2F9C59A3AE4172B5CB57BD2C",
         "version": "3.0a"
     },
     "Final Fantasy VI - Sound Restoration hack and few framerate drop": {
+        "category": "hacks",
         "filename": "",
         "id": "657",
+        "modified": "10 April 2016",
         "platform": "gba",
         "sha1": "E9A2A58BC56ACE26CB56D0CF5CDAD1A10AA5DEDF",
         "version": "2.1"
     },
     "Galaga & Galaxian DX": {
+        "category": "hacks",
         "filename": "Galaga&GalaxianDX_v1.1.ips",
         "id": "6541",
+        "modified": "26 January 2022",
         "platform": "gb",
         "sha1": "59EA594AF8520732F78C337F5C96A5BA2BDDF1CB",
         "version": "1.1"
     },
     "Kirby - Tilt 'n' Tumble Accelerometer removal patch": {
+        "category": "hacks",
         "filename": "Kirby - Tilt 'n' Tumble accelerometer removal patch.ips",
         "id": "6479",
+        "modified": "28 April 2022",
         "platform": "gb",
         "sha1": "6AB8D666E2BEBBB3FEE7796C8968AAB2EA21B8F9",
         "version": "1.0"
     },
     "Kirby's Dream Land DX": {
+        "category": "hacks",
         "filename": "dreamLandDX.ips",
         "id": "5213",
+        "modified": "21 June 2020",
         "platform": "gb",
         "sha1": "90979BAA1D0E24B41B5C304C5DDAF77450692D5A",
         "version": "1.3"
     },
     "Link's Awakening Redux": {
+        "category": "hacks",
         "filename": "",
         "id": "4672",
+        "modified": "29 November 2021",
         "platform": "gb",
         "sha1": "1C091225688D966928CC74336DBEF2E07D12A47C",
         "version": "1.3.5"
     },
     "Macross: Scrambled Valkyrie - Overtech Edition": {
+        "category": "hacks",
         "filename": "Macross_Scrambled Valkyrie - Overtech Edition v1.1.ips",
         "id": "4552",
+        "modified": "26 January 2022",
         "platform": "snes",
         "sha1": "459A727AEEB013CD1B63F54D4A2355C2F0A1999F",
         "version": "1.1"
     },
     "Metroid + Saving": {
+        "category": "hacks",
         "filename": "Metroid Plus.ips",
         "id": "1186",
+        "modified": "10 March 2014",
         "platform": "nes",
         "sha1": "9901E0B53828475CD77B4B684E0590252CB762D8",
         "version": "0.3"
     },
     "Metroid II - EJRTQ Colorization": {
+        "category": "hacks",
         "filename": "metroid ii - color (ejrtq) v1.3.ips",
         "id": "4388",
+        "modified": "02 February 2020",
         "platform": "gb",
         "sha1": "74A2FAD86B9A4C013149B1E214BC4600EFB1066D",
         "version": "1.3"
     },
     "Oracle of Ages GBC palettes": {
+        "category": "hacks",
         "filename": "Oracle of Ages GBC palettes.ips",
         "id": "3589",
+        "modified": "22 July 2017",
         "platform": "gb",
         "sha1": "880374fb978b18af4aa529e2e32f7ffb4d7dd2f4",
         "version": "1.0"
     },
     "Oracle of Seasons GBC palettes": {
+        "category": "hacks",
         "filename": "Oracle of Seasons GBC palettes.ips",
         "id": "3588",
+        "modified": "22 July 2017",
         "platform": "gb",
         "sha1": "BA1268290FB2B1B70505D2D7B5825FC8A4816A4B",
         "version": "1.0"
     },
     "Pokemon Gold 97: Reforged": {
+        "category": "hacks",
         "filename": "pokegold97_v5.0.ips",
         "id": "5522",
+        "modified": "11 April 2022",
         "platform": "gb",
         "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
         "version": "5.0a"
     },
     "Pokemon Perfect Crystal (2020 Update)": {
+        "category": "hacks",
         "filename": "Pokemon Perfect Crystal (2020 Update).ips",
         "id": "4935",
+        "modified": "18 February 2020",
         "platform": "gb",
         "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
         "version": "1.0"
     },
     "Pokemon Silver 97: Reforged": {
+        "category": "hacks",
         "filename": "pokesilver97_v5.0.ips",
         "id": "5522",
+        "modified": "11 April 2022",
         "platform": "gb",
         "sha1": "F2F52230B536214EF7C9924F483392993E226CFB",
         "version": "5.0a"
     },
     "Super Ghouls'n Ghosts Restoration": {
+        "category": "hacks",
         "filename": "Super Ghouls'n Ghosts Restoration.ips",
         "id": "3473",
+        "modified": "11 December 2019",
         "platform": "snes",
         "sha1": "F12280B13EEA88CA03D700B75CF3C13A0E13F3BC",
         "version": "Final"
     },
     "Super Mario Land 2 DX": {
+        "category": "hacks",
         "filename": "SML2DXv181.ips",
         "id": "3784",
+        "modified": "26 May 2019",
         "platform": "gb",
         "sha1": "bba408539ecbf8d322324956d859bc86e2a9977b",
         "version": "1.8.1"
     },
     "Super Mario Land DX": {
+        "category": "hacks",
         "filename": "smldx.ips",
         "id": "4477",
+        "modified": "20 April 2022",
         "platform": "gb",
         "sha1": "3A4DDB39B234A67FFB361EE7ABC3D23E0A8B1C89",
         "version": "1.0"
     },
     "Wario Land 2 - Enhanced Graphics": {
+        "category": "hacks",
         "filename": "Wario Land II-enhanced.ips",
         "id": "2990",
+        "modified": "11 February 2021",
         "platform": "gb",
         "sha1": "AE37915058035DF4CEEDD72D709F91EFB4878EFF",
         "version": "1.1.8"
