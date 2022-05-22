@@ -60,10 +60,12 @@ def get_romhacking(url):
 
     def get_platform(platform):
         platform = platform.lower()
-        if platform == "super nintendo":
-            platform = "snes"
-        elif platform == "nintendo entertainment system":
+        if platform == "nintendo entertainment system":
             platform = "nes"
+        elif platform == "playstation portable":
+            platform = "psp"
+        elif platform == "super nintendo":
+            platform = "snes"
 
         return platform
 
