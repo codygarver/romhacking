@@ -96,18 +96,6 @@
             "sha1": "bba408539ecbf8d322324956d859bc86e2a9977b",
             "version": "1.8.1"
         },
-        "3867": {
-            "category": "hacks",
-            "filename": [
-                ""
-            ],
-            "game": "Castlevania",
-            "modified": "28 February 2021",
-            "name": "Castlevania: Improved Controls",
-            "platform": "nes",
-            "sha1": "A31B8BD5B370A9103343C866F3C2B2998E889341",
-            "version": "3.1"
-        },
         "4388": {
             "category": "hacks",
             "filename": [
@@ -147,7 +135,7 @@
         "4672": {
             "category": "hacks",
             "filename": [
-                ""
+                "Link's Awakening Redux.ips", "Font Improvement.ips"
             ],
             "game": "The Legend of Zelda: Link's Awakening DX",
             "modified": "29 November 2021",
@@ -180,6 +168,17 @@
             "sha1": "90979BAA1D0E24B41B5C304C5DDAF77450692D5A",
             "version": "1.3"
         },
+        "5293": {
+            "filename": [
+                "Yu-Gi-Oh Text Overhaul.ips"
+            ],
+            "game": "Yu-Gi-Oh! The Sacred Cards",
+            "modified": "30 July 2020",
+            "name": "Yu-Gi-Oh - The Sacred Cards: Text Overhaul",
+            "platform": "gba",
+            "sha1": "9A23AD34F67AC1F1343B7009F11AC95C77B782EF",
+            "version": "1.0"
+        },
         "5522": {
             "category": "hacks",
             "filename": [
@@ -195,13 +194,13 @@
         "563": {
             "category": "hacks",
             "filename": [
-                ""
+                "ff5a_mus_v3.0_america.ips"
             ],
             "game": "Final Fantasy V Advance",
             "modified": "07 November 2015",
             "name": "Final Fantasy V - Sound restoration and no framerate drop",
             "platform": "gba",
-            "sha1": "4FC4BC7C1C3ABE9D2F9C59A3AE4172B5CB57BD2C",
+            "sha1": "492789276EAA3E94152B143AD92F310B8A3D5366",
             "version": "3.0a"
         },
         "6244": {
