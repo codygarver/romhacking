@@ -9,36 +9,6 @@ import pathlib
 import signal
 import subprocess
 import sys
-import tempfile
-import zipfile
-
-
-def extract(rom_path):
-    # Only attempt to extract zip files
-    if pathlib.Path(rom_path).suffix == ".zip":
-        # Extract zip to temp dir
-        tmp_dir = tempfile.mkdtemp()
-        with zipfile.ZipFile(rom_path, "r") as zip_ref:
-            zip_ref.extractall(tmp_dir)
-
-        # Get the (first) file with a known extension in temp dir
-        rom_glob = glob.glob(tmp_dir + "/*.gb*") + \
-            glob.glob(tmp_dir + "/*.nes")
-        rom_path = rom_glob[0]
-
-    return rom_path
-
-
-def compress(rom_path):
-    output_dir = pathlib.Path(rom_path).parent
-    os.chdir(output_dir)
-
-    # Compress patched rom
-    output_zip = pathlib.Path(rom_path).stem + ".zip"
-    with zipfile.ZipFile(output_zip, "w") as zip_ref:
-        zip_ref.write(os.path.basename(rom_path))
-
-    return output_zip
 
 
 def get_hash(rom_path):
@@ -64,21 +34,20 @@ def apply_patch(rom_path, patch_path, output_path):
 
 
 def get_roms_dict(roms_dir):
-    rom_files = glob.glob(roms_dir + "/*.zip") + \
-        glob.glob(roms_dir + "/*.gb*") + \
+    rom_files = glob.glob(roms_dir + "/*.gb*") + \
         glob.glob(roms_dir + "/*.nes")
 
     # Populate roms dictionary with found files respective metadata
     roms_dict = {}
     for rom_path in rom_files:
         roms_dict.update({pathlib.Path(rom_path).stem: {
-            "extension": pathlib.Path(extract(rom_path)).suffix,
+            "extension": pathlib.Path(rom_path).suffix,
             "filename": pathlib.Path(rom_path).name,
             "patch_name": "",
             "patch_path": "",
             "platform": "",
             "rom_path": rom_path,
-            "sha1": get_hash(extract(rom_path)),
+            "sha1": get_hash(rom_path),
             "version": "",
         }})
 
@@ -135,7 +104,4 @@ if __name__ == "__main__":
             apply_patch(rom_path, patch_path, output_path)
 
             # Compress patched rom
-            print("Success! " + compress(output_path))
-
-            # Delete uncompressed patched rom
-            os.remove(output_path)
+            print("Success! " + output_path)
