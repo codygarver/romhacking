@@ -76,6 +76,11 @@ def get_romhacking(url):
             print(length_error)
             exit(1)
 
+        game = soup.find("h4", {"class": "date"}).text.strip()
+        game = re.sub("Hack of ", "", game)
+        game = re.sub("\u00e9", "e", game)  # Pokémon to Pokemon
+        game = re.sub("\u2019", "\'", game)  # '
+
         modified = rom_info[11]
         platform = get_platform(rom_info[3])
         version = rom_info[7]
@@ -85,11 +90,13 @@ def get_romhacking(url):
             print(length_error)
             exit(1)
 
+        game = ""
+
         modified = rom_info[13]
         platform = get_platform(rom_info[4])
         version = rom_info[9]
 
-    return name, id, modified, platform, version, sha1, category
+    return game, name, id, modified, platform, version, sha1, category
 
 
 def sigint_handler(signal, frame):
@@ -97,17 +104,33 @@ def sigint_handler(signal, frame):
 
 
 def add(url):
-    name, id, modified, platform, version, sha1, category = get_romhacking(url)
+    game, name, id, modified, platform, version, sha1, category = get_romhacking(
+        url)
 
-    patches_dict.update({name: {
-        "category": category,
-        "filename": "",
-        "id": id,
-        "modified": modified,
-        "platform": platform,
-        "sha1": sha1.upper(),
-        "version": version
-    }})
+    # Create category if nonexistent
+    if category not in patches_dict:
+        patches_dict[category] = {}
+
+    # Create entry if nonexistent
+    if id not in patches_dict[category]:
+        patches_dict[category][id] = {
+            "filename": [""],
+            "game": game,
+            "modified": modified,
+            "name": name,
+            "platform": platform,
+            "sha1": sha1.upper(),
+            "version": version
+        }
+        print("Added " + name)
+    # Or update existing entry
+    else:
+        patches_dict[category][id]["game"] = game
+        patches_dict[category][id]["modified"] = modified
+        patches_dict[category][id]["name"] = name
+        patches_dict[category][id]["platform"] = platform
+        patches_dict[category][id]["version"] = version
+        print("Updated " + name)
 
     if args.debug:
         print(json.dumps(patches_dict, sort_keys=True, indent=4))
@@ -115,30 +138,33 @@ def add(url):
     with open(args.config, "w") as out_file:
         json.dump(patches_dict, out_file, indent=4, sort_keys=True)
 
-    print("Added " + name)
-
 
 def update():
     if not os.path.exists(args.config):
         print("Error, config.json does not exist! First initialize it with --add")
         exit(1)
 
-    for patch in patches_dict:
-        local_version = patches_dict[patch]["version"]
-        local_date = patches_dict[patch]["modified"]
-        url = "https://www.romhacking.net/" + \
-            patches_dict[patch]["category"] + "/" + patches_dict[patch]["id"]
-        _, _, latest_date, _, latest_version, _, _ = get_romhacking(url)
-        if local_version != latest_version or local_date != latest_date:
-            if args.update_github:
-                github(patch, local_version, latest_version, latest_date, url)
-            else:
-                print("Outdated: " + patch)
-                print("Local Version: " + local_version)
-                print("Latest Version: " + latest_version)
-                print("Local Date: " + local_date)
-                print("Latest Date: " + latest_date)
-                print("URL: " + url + "\n")
+    for category in patches_dict:
+        for patch in patches_dict[category]:
+            local_version = patches_dict[category][patch]["version"]
+            local_date = patches_dict[category][patch]["modified"]
+            url = "https://www.romhacking.net/" + \
+                category + \
+                "/" + patch
+            _, _, _, latest_date, _, latest_version, _, _ = get_romhacking(
+                url)
+            if local_version != latest_version or local_date != latest_date:
+                if args.update_github:
+                    github(patch, local_version,
+                           latest_version, latest_date, url)
+                else:
+                    print(
+                        "Outdated: " + patches_dict[category][patch]["name"] + " (" + patch + ")")
+                    print("Local Version: " + local_version)
+                    print("Latest Version: " + latest_version)
+                    print("Local Date: " + local_date)
+                    print("Latest Date: " + latest_date)
+                    print("URL: " + url + "\n")
 
 
 def github(romhack_name, local_version, latest_version, latest_date, url):
@@ -169,17 +195,19 @@ def tests():
 
     fail = False
 
-    for patch in patches_dict:
-        for key in patches_dict[patch]:
-            if not patches_dict[patch][key]:
-                print("Missing " + key + ": " + patch +
-                      " (" + patches_dict[patch]["id"] + ")")
-                fail = True
+    for category in patches_dict:
+        for patch in patches_dict[category]:
+            for patch_file in patches_dict[category][patch].get("filename"):
+                if not patch_file:
+                    print("Error: Missing patch filename: " + patches_dict[category][patch].get(
+                        "name") + " (" + patch + ")")
+                    fail = True
 
-        if patches_dict[patch]["filename"]:
-            if not os.path.exists("patches/" + patches_dict[patch]["filename"]):
-                print("Missing patch file: " + patches_dict[patch]["filename"])
-                fail = True
+                if not os.path.exists("patches/" + patch_file):
+                    print("Error: Missing patch file: " + patches_dict[category][patch].get(
+                        "name") + " (" + patch + ")" +
+                        patch_file)
+                    fail = True
 
     if fail:
         exit(1)
@@ -204,7 +232,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Read json to dictionary
-    if os.path.exists(str(args.config)):
+    if os.path.exists(args.config) and os.stat(args.config).st_size != 0:
         patches_file = open(args.config)
         patches_dict = json.load(patches_file)
     else:
