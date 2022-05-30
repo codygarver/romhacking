@@ -155,7 +155,7 @@ def update():
                 url)
             if local_version != latest_version or local_date != latest_date:
                 if args.update_github:
-                    github(patch, local_version,
+                    github(patches_dict[category][patch]["name"], local_version,
                            latest_version, latest_date, url)
                 else:
                     print(
