@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 import argparse
+import pathlib
 import json
 import os
 import re
@@ -200,25 +201,48 @@ def tests():
 
     for category in patches_dict:
         for patch in patches_dict[category]:
+            # Test missing sha1sum
             if not patches_dict[category][patch]["sha1"]:
                 print("Error: Missing sha1: " +
                       patches_dict[category][patch]["name"] + " (" + patch + ")")
                 fail = True
+            # Test missing patch filename
             if len(patches_dict[category][patch]["filename"]) == 0:
                 print("Error: Missing patch filename: " + patches_dict[category][patch].get(
                     "name") + " (" + patch + ")")
                 fail = True
+
             for patch_file in patches_dict[category][patch].get("filename"):
+                # Test missing patch filename
                 if not patch_file:
                     print("Error: Missing patch filename: " + patches_dict[category][patch].get(
                         "name") + " (" + patch + ")")
                     fail = True
 
+                # Test missing patch file
                 if not os.path.exists("patches/" + patch_file):
                     print("Error: Missing patch file: " + patches_dict[category][patch].get(
                         "name") + " (" + patch + ") " +
                         patch_file)
                     fail = True
+
+    # Test unknown patch files
+    dict_files = []
+    for category in patches_dict:
+        for patch in patches_dict[category]:
+            dict_files = dict_files + \
+                patches_dict[category][patch].get("filename")
+
+    patches_path = pathlib.Path("patches/")
+    ips_files = patches_path.glob("*.ips")
+    found_files = []
+    for file in ips_files:
+        found_files = found_files + [file.name]
+    unknown_files = [f for f in found_files if f not in dict_files]
+    if unknown_files:
+        for file in unknown_files:
+            print("Unknown patch file: " + file)
+        fail = True
 
     if fail:
         exit(1)
