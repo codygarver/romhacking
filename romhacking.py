@@ -55,6 +55,7 @@ def get_romhacking(url):
 
     title = soup.find("meta", property="og:title")
     name = title["content"]
+    name = re.sub("\/", "&", name)
 
     id = re.search(r'\d+', url).group()
 
@@ -148,6 +149,9 @@ def update():
         for patch in patches_dict[category]:
             local_version = patches_dict[category][patch]["version"]
             local_date = patches_dict[category][patch]["modified"]
+            game = patches_dict[category][patch]["game"]
+            name = patches_dict[category][patch]["name"]
+            issue_title = "Update " + game + " " + name
             url = "https://www.romhacking.net/" + \
                 category + \
                 "/" + patch
@@ -155,11 +159,10 @@ def update():
                 url)
             if local_version != latest_version or local_date != latest_date:
                 if args.update_github:
-                    github(patches_dict[category][patch]["name"], local_version,
+                    github(issue_title, local_version,
                            latest_version, latest_date, url)
                 else:
-                    print(
-                        "Outdated: " + patches_dict[category][patch]["name"] + " (" + patch + ")")
+                    print(issue_title + " (" + patch + ")")
                     print("Local Version: " + local_version)
                     print("Latest Version: " + latest_version)
                     print("Local Date: " + local_date)
