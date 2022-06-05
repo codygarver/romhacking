@@ -83,6 +83,17 @@
             "sha1": "880374fb978b18af4aa529e2e32f7ffb4d7dd2f4",
             "version": "1.0"
         },
+        "3723": {
+            "filename": [
+                "Mega Man Zero Restoration.ips"
+            ],
+            "game": "Mega Man Zero",
+            "modified": "15 December 2019",
+            "name": "Mega Man Zero Restoration",
+            "platform": "gba",
+            "sha1": "193B14120119162518A73C70876F0B8BFFDBD96E",
+            "version": "Final"
+        },
         "3764": {
             "category": "hacks",
             "filename": [
