@@ -184,7 +184,7 @@ def github(romhack_name, local_version, latest_version, latest_date, url):
                 return True
         return False
 
-    issue_title = "Update %s" % (romhack_name)
+    issue_title = "%s" % (romhack_name)
     if not github_issue_exists(issue_title):
         issue = repo.create_issue(
             issue_title, "%s version %s available %s, updated %s" % (romhack_name, latest_version, url, latest_date))
