@@ -17,9 +17,9 @@
             "filename": [
                 "Akuden - Logotrans (New Alucard) v7.ips"
             ],
-            "game": "Castlevania III: Dracula\u2019s Curse",
+            "game": "Castlevania III: Dracula's Curse",
             "modified": "10 November 2017",
-            "name": "Akumajou Densetsu - Localization / Title Screen Redone",
+            "name": "Akumajou Densetsu - Localization & Title Screen Redone",
             "platform": "nes",
             "sha1": "A0F3B31D4E3B0D2CA2E8A34F91F14AD99A5AD11F",
             "version": "7.1"
@@ -135,7 +135,8 @@
         "4672": {
             "category": "hacks",
             "filename": [
-                "Link's Awakening Redux.ips", "Font Improvement.ips"
+                "Link's Awakening Redux.ips",
+                "Font Improvement.ips"
             ],
             "game": "The Legend of Zelda: Link's Awakening DX",
             "modified": "29 November 2021",
@@ -206,7 +207,7 @@
         "6244": {
             "category": "hacks",
             "filename": [
-                "FF1 DoS Vancian 1.3a - Main Version.ips"
+                "FF1 DoS Maeson 1.3a - Higher MP 1-4.ips"
             ],
             "game": "Final Fantasy I & II: Dawn of Souls",
             "modified": "23 February 2022",
@@ -232,7 +233,7 @@
             "filename": [
                 "Galaga&GalaxianDX_v1.1.ips"
             ],
-            "game": "Arcade Classic No. 3: Galaga / Galaxian",
+            "game": "Arcade Classic No. 3: Galaga & Galaxian",
             "modified": "26 January 2022",
             "name": "Galaga & Galaxian DX",
             "platform": "gb",
@@ -241,9 +242,7 @@
         },
         "657": {
             "category": "hacks",
-            "filename": [
-                ""
-            ],
+            "filename": [],
             "game": "Final Fantasy VI Advance",
             "modified": "10 April 2016",
             "name": "Final Fantasy VI - Sound Restoration hack and few framerate drop",
