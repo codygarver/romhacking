@@ -200,6 +200,9 @@ def tests():
 
     for category in patches_dict:
         for patch in patches_dict[category]:
+            if not patches_dict[category][patch]["sha1"]:
+                print("Error: Missing sha1: " +
+                      patches_dict[category][patch]["name"] + " (" + patch + ")")
             for patch_file in patches_dict[category][patch].get("filename"):
                 if not patch_file:
                     print("Error: Missing patch filename: " + patches_dict[category][patch].get(
