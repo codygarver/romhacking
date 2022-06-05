@@ -75,31 +75,7 @@ def get_roms_dict(roms_dir):
     return roms_dict
 
 
-def sigint_handler(signal, frame):
-    sys.exit(0)
-
-
-signal.signal(signal.SIGINT, sigint_handler)
-
-if __name__ == "__main__":
-    # Configure argparse
-    description = "Manage rom hacks and check for updates"
-    parser = argparse.ArgumentParser(
-        description=description)
-    parser.add_argument("--config", required=True)
-    parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--roms-dir", required=True)
-    parser.add_argument("--patches-dir", required=True)
-
-    args = parser.parse_args()
-
-    # Read json to dictionary
-    if os.path.exists(args.config) and os.stat(args.config).st_size != 0:
-        patches_file = open(args.config)
-        patches_dict = json.load(patches_file)
-    else:
-        exit(1)
-
+def patch_roms():
     roms_dict = get_roms_dict(args.roms_dir)
     for rom in roms_dict:
         # Only patch roms with matching patch
@@ -121,6 +97,7 @@ if __name__ == "__main__":
                 # Output patched rom
                 output_dir = pathlib.Path(
                     args.output_dir, roms_dict[rom]["platform"])
+                output_dir.mkdir(parents=True, exist_ok=True)
                 output_path = pathlib.Path(
                     output_dir, output_name)
 
@@ -141,3 +118,31 @@ if __name__ == "__main__":
                         print("Success! " + output_path.name)
                     else:
                         count = count + 1
+
+
+def sigint_handler(signal, frame):
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, sigint_handler)
+
+if __name__ == "__main__":
+    # Configure argparse
+    description = "Manage rom hacks and check for updates"
+    parser = argparse.ArgumentParser(
+        description=description)
+    parser.add_argument("--config", required=True)
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--patches-dir", required=True)
+    parser.add_argument("--roms-dir", required=True)
+
+    args = parser.parse_args()
+
+    # Read json to dictionary
+    if os.path.exists(args.config) and os.stat(args.config).st_size != 0:
+        patches_file = open(args.config)
+        patches_dict = json.load(patches_file)
+    else:
+        exit(1)
+
+    patch_roms()
