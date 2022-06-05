@@ -24,6 +24,17 @@
             "sha1": "A0F3B31D4E3B0D2CA2E8A34F91F14AD99A5AD11F",
             "version": "7.1"
         },
+        "2958": {
+            "filename": [
+                "FF1 - No Escape!.ips"
+            ],
+            "game": "Final Fantasy I & II: Dawn of Souls",
+            "modified": "24 August 2017",
+            "name": "FF1: DoS - Unrunnable Battle Notification",
+            "platform": "gba",
+            "sha1": "6472695D69661490F78245E2982E1E676C080BE7",
+            "version": "1.0"
+        },
         "2990": {
             "category": "hacks",
             "filename": [
@@ -204,10 +215,23 @@
             "sha1": "492789276EAA3E94152B143AD92F310B8A3D5366",
             "version": "3.0a"
         },
+        "5685": {
+            "filename": [
+                "Improved Equipment Stat Viewing.ips"
+            ],
+            "game": "Final Fantasy I & II: Dawn of Souls",
+            "modified": "27 January 2021",
+            "name": "Improved Equipment Stat Viewing",
+            "platform": "gba",
+            "sha1": "6472695D69661490F78245E2982E1E676C080BE7",
+            "version": "1.0"
+        },
         "6244": {
             "category": "hacks",
             "filename": [
-                "FF1 DoS Maeson 1.3a - Higher MP 1-4.ips"
+                "FF1 DoS Maeson 1.3a - Higher MP 1-4.ips",
+                "Improved Equipment Stat Viewing.ips",
+                "FF1 - No Escape!.ips"
             ],
             "game": "Final Fantasy I & II: Dawn of Souls",
             "modified": "23 February 2022",
