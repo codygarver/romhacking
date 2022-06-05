@@ -109,7 +109,7 @@ if __name__ == "__main__":
             input_path = ""
             for path in roms_dict[rom]["patch_path"]:
                 # Input patch
-                patch_path = args.patches_dir + "/" + path
+                patch_path = pathlib.Path(args.patches_dir, path)
                 if count == length:
                     output_name = roms_dict[rom]["game"] + \
                         ": " + \
@@ -119,8 +119,10 @@ if __name__ == "__main__":
                 else:
                     output_name = "output" + str(count) + ".tmp"
                 # Output patched rom
-                output_path = args.output_dir + "/" + \
-                    roms_dict[rom]["platform"] + "/" + output_name
+                output_dir = pathlib.Path(
+                    args.output_dir, roms_dict[rom]["platform"])
+                output_path = pathlib.Path(
+                    output_dir, output_name)
 
                 # Patch rom
                 if not input_path:
@@ -133,10 +135,9 @@ if __name__ == "__main__":
 
                     # Clean up temporary files
                     if count == length:
-                        tmp_glob = glob.glob(
-                            args.output_dir + "/" + roms_dict[rom]["platform"] + "/*.tmp")
+                        tmp_glob = output_dir.glob("*.tmp")
                         for tmp_file in tmp_glob:
                             os.remove(tmp_file)
-                        print("Success! " + output_path)
+                        print("Success! " + output_path.name)
                     else:
                         count = count + 1
