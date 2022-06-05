@@ -216,7 +216,7 @@ def tests():
 
                 if not os.path.exists("patches/" + patch_file):
                     print("Error: Missing patch file: " + patches_dict[category][patch].get(
-                        "name") + " (" + patch + ")" +
+                        "name") + " (" + patch + ") " +
                         patch_file)
                     fail = True
 
