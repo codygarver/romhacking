@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import glob
 import hashlib
 import json
@@ -81,15 +82,25 @@ def sigint_handler(signal, frame):
 signal.signal(signal.SIGINT, sigint_handler)
 
 if __name__ == "__main__":
-    root_dir = str(pathlib.Path.home()) + "/romhacking"
-    output_dir = root_dir + "/output"
-    patches_dir = root_dir + "/patches"
-    roms_dir = root_dir + "/roms"
+    # Configure argparse
+    description = "Manage rom hacks and check for updates"
+    parser = argparse.ArgumentParser(
+        description=description)
+    parser.add_argument("--config", required=True)
+    parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--roms-dir", required=True)
+    parser.add_argument("--patches-dir", required=True)
 
-    patches_file = open(root_dir + "/" + "config.json")
-    patches_dict = json.load(patches_file)
+    args = parser.parse_args()
 
-    roms_dict = get_roms_dict(roms_dir)
+    # Read json to dictionary
+    if os.path.exists(args.config) and os.stat(args.config).st_size != 0:
+        patches_file = open(args.config)
+        patches_dict = json.load(patches_file)
+    else:
+        exit(1)
+
+    roms_dict = get_roms_dict(args.roms_dir)
     for rom in roms_dict:
         # Only patch roms with matching patch
         if roms_dict[rom]["patch_path"]:
@@ -98,7 +109,7 @@ if __name__ == "__main__":
             input_path = ""
             for path in roms_dict[rom]["patch_path"]:
                 # Input patch
-                patch_path = patches_dir + "/" + path
+                patch_path = args.patches_dir + "/" + path
                 if count == length:
                     output_name = roms_dict[rom]["game"] + \
                         ": " + \
@@ -108,7 +119,7 @@ if __name__ == "__main__":
                 else:
                     output_name = "output" + str(count) + ".tmp"
                 # Output patched rom
-                output_path = output_dir + "/" + \
+                output_path = args.output_dir + "/" + \
                     roms_dict[rom]["platform"] + "/" + output_name
 
                 # Patch rom
@@ -123,10 +134,9 @@ if __name__ == "__main__":
                     # Clean up temporary files
                     if count == length:
                         tmp_glob = glob.glob(
-                            output_dir + "/" + roms_dict[rom]["platform"] + "/*.tmp")
+                            args.output_dir + "/" + roms_dict[rom]["platform"] + "/*.tmp")
                         for tmp_file in tmp_glob:
                             os.remove(tmp_file)
+                        print("Success! " + output_path)
                     else:
                         count = count + 1
-
-                    print("Success! " + output_path)
