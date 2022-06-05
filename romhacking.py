@@ -256,15 +256,25 @@ if __name__ == "__main__":
     description = "Manage rom hacks and check for updates"
     parser = argparse.ArgumentParser(
         description=description)
-    parser.add_argument("--config", required=True)
+    parser.add_argument("--config")
+    parser.add_argument("--debug", action='store_true')
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--add")
     group.add_argument("--tests", action='store_true')
     group.add_argument("--update", action='store_true')
     group.add_argument("--update-github", action='store_true')
-    parser.add_argument("--debug", action='store_true')
 
     args = parser.parse_args()
+
+    # Sometimes require --config
+    if args.add and (args.config is None):
+        parser.error("--add requires --config")
+    if args.tests and (args.config is None):
+        parser.error("--tests requires --config")
+    if args.update and (args.config is None):
+        parser.error("--update requires --config")
+    if args.update_github and (args.config is None):
+        parser.error("--update_github requires --config")
 
     # Read json to dictionary
     if os.path.exists(args.config) and os.stat(args.config).st_size != 0:
