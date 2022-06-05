@@ -266,7 +266,9 @@
         },
         "657": {
             "category": "hacks",
-            "filename": [],
+            "filename": [
+                "ff6a_sound_restoration_v2_1_us.ips"
+            ],
             "game": "Final Fantasy VI Advance",
             "modified": "10 April 2016",
             "name": "Final Fantasy VI - Sound Restoration hack and few framerate drop",
