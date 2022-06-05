@@ -33,23 +33,24 @@ def apply_patch(rom_path, patch_path, output_path):
 
 
 def get_roms_dict(roms_dir):
-    rom_files = glob.glob(roms_dir + "/*.gb*") + \
-        glob.glob(roms_dir + "/*.nes")
+    rom_files = glob.glob(roms_dir + "/**/*.gb*", recursive=True) + \
+        glob.glob(roms_dir + "/**/*.nes", recursive=True)
 
     # Populate roms dictionary with found files respective metadata
     roms_dict = {}
     for rom_path in rom_files:
-        roms_dict.update({pathlib.Path(rom_path).stem: {
-            "extension": pathlib.Path(rom_path).suffix,
-            "filename": pathlib.Path(rom_path).name,
-            "game": "",
-            "patch_name": "",
-            "patch_path": "",
-            "platform": "",
-            "rom_path": rom_path,
-            "sha1": get_hash(rom_path),
-            "version": "",
-        }})
+        if pathlib.Path(rom_path).is_file():
+            roms_dict.update({pathlib.Path(rom_path).stem: {
+                "extension": pathlib.Path(rom_path).suffix,
+                "filename": pathlib.Path(rom_path).name,
+                "game": "",
+                "patch_name": "",
+                "patch_path": "",
+                "platform": "",
+                "rom_path": rom_path,
+                "sha1": get_hash(rom_path),
+                "version": "",
+            }})
 
     # Match roms by hash with known patch paths
     for rom in roms_dict:
@@ -113,18 +114,19 @@ if __name__ == "__main__":
                 # Patch rom
                 if not input_path:
                     input_path = roms_dict[rom]["rom_path"]
-                apply_patch(input_path,
-                            patch_path, output_path)
-                input_path = output_path
 
-                # Clean up temporary files
-                if count == length:
-                    tmp_glob = glob.glob(
-                        output_dir + "/" + roms_dict[rom]["platform"] + "/*.tmp")
-                    for tmp_file in tmp_glob:
-                        os.remove(tmp_file)
-                else:
-                    count = count + 1
+                if pathlib.Path(input_path).is_file():
+                    apply_patch(input_path,
+                                patch_path, output_path)
+                    input_path = output_path
 
-            # Compress patched rom
-            print("Success! " + output_path)
+                    # Clean up temporary files
+                    if count == length:
+                        tmp_glob = glob.glob(
+                            output_dir + "/" + roms_dict[rom]["platform"] + "/*.tmp")
+                        for tmp_file in tmp_glob:
+                            os.remove(tmp_file)
+                    else:
+                        count = count + 1
+
+                    print("Success! " + output_path)
