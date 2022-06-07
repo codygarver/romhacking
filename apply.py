@@ -41,83 +41,72 @@ def get_roms_dict(roms_dir):
     roms_dict = {}
     for rom_path in rom_files:
         if pathlib.Path(rom_path).is_file():
-            roms_dict.update({pathlib.Path(rom_path).stem: {
-                "extension": pathlib.Path(rom_path).suffix,
-                "filename": pathlib.Path(rom_path).name,
-                "game": "",
-                "patch_name": "",
-                "patch_path": "",
-                "platform": "",
-                "rom_path": rom_path,
-                "sha1": get_hash(rom_path),
-                "version": "",
+            roms_dict.update({get_hash(pathlib.Path(rom_path).as_posix()): {
+                "rom_path": pathlib.Path(rom_path).as_posix(),
             }})
 
-    # Match roms by hash with known patch paths
-    for rom in roms_dict:
-        for category in patches_dict:
-            for patch in patches_dict[category]:
-                # Compare rom sha1 hash sum against patch's required hash
-                if roms_dict[rom]["sha1"].upper() == patches_dict[category][patch]["sha1"].upper():
-                    # Add match's game's name to roms dictionary
-                    roms_dict[rom]["game"] = patches_dict[category][patch]["game"]
-                    # Add match's patch name to roms dictionary
-                    roms_dict[rom]["patch_name"] = patches_dict[category][patch]["name"]
-                    # Add match's patch path to roms dictionary
-                    roms_dict[rom]["patch_path"] = patches_dict[category][patch]["filename"]
-                    # Add match's patch platform to roms dictionary
-                    roms_dict[rom]["platform"] = patches_dict[category][patch]["platform"]
-                    # Add match's patch version to roms dictionary
-                    roms_dict[rom]["version"] = patches_dict[category][patch]["version"]
+    patches_dict_copy = patches_dict.copy()
 
-    # print(json.dumps(roms_dict, sort_keys=True, indent=4))
+    for category in patches_dict:
+        for patch in patches_dict[category]:
+            for hash in roms_dict:
+                if patches_dict[category][patch]["sha1"].upper() == hash.upper():
+                    rom_path = roms_dict[hash]["rom_path"]
+                    patches_dict_copy[category][patch]["rom_path"] = rom_path
+                    patches_dict_copy[category][patch]["extension"] = pathlib.Path(
+                        rom_path).suffix
+                    patches_dict_copy[category][patch]["rom_filename"] = pathlib.Path(
+                        rom_path).name
 
-    return roms_dict
+    #print(json.dumps(patches_dict_copy, sort_keys=True, indent=4))
+
+    return patches_dict_copy
 
 
 def patch_roms():
     roms_dict = get_roms_dict(args.roms_dir)
-    for rom in roms_dict:
-        # Only patch roms with matching patch
-        if roms_dict[rom]["patch_path"]:
-            count = 1
-            length = len(roms_dict[rom]["patch_path"])
-            input_path = ""
-            for path in roms_dict[rom]["patch_path"]:
-                # Input patch
-                patch_path = pathlib.Path(args.patches_dir, path)
-                if count == length:
-                    output_name = roms_dict[rom]["game"] + \
-                        ": " + \
-                        roms_dict[rom]["patch_name"] + " patched " + \
-                        roms_dict[rom]["version"] + \
-                        roms_dict[rom]["extension"]
-                else:
-                    output_name = "output" + str(count) + ".tmp"
-                # Output patched rom
-                output_dir = pathlib.Path(
-                    args.output_dir, roms_dict[rom]["platform"])
-                output_dir.mkdir(parents=True, exist_ok=True)
-                output_path = pathlib.Path(
-                    output_dir, output_name)
-
-                # Patch rom
-                if not input_path:
-                    input_path = roms_dict[rom]["rom_path"]
-
-                if pathlib.Path(input_path).is_file():
-                    apply_patch(input_path,
-                                patch_path, output_path)
-                    input_path = output_path
-
-                    # Clean up temporary files
+    for category in roms_dict:
+        for rom in roms_dict[category]:
+            # Only patch roms with matching patch
+            if roms_dict[category][rom]["filename"] and "rom_path" in roms_dict[category][rom]:
+                count = 1
+                length = len(roms_dict[category][rom]["filename"])
+                input_path = ""
+                for path in roms_dict[category][rom]["filename"]:
+                    # Input patch
+                    patch_path = pathlib.Path(args.patches_dir, path)
                     if count == length:
-                        tmp_glob = output_dir.glob("*.tmp")
-                        for tmp_file in tmp_glob:
-                            os.remove(tmp_file)
-                        print("Success! " + output_path.name)
+                        game = roms_dict[category][rom]["game"]
+                        name = roms_dict[category][rom]["name"]
+                        version = roms_dict[category][rom]["version"]
+                        extension = roms_dict[category][rom]["extension"]
+                        output_name = game + ": " + name + " patched " + version + extension
                     else:
-                        count = count + 1
+                        output_name = "output" + str(count) + ".tmp"
+                    # Output patched rom
+                    output_dir = pathlib.Path(
+                        args.output_dir, roms_dict[category][rom]["platform"])
+                    output_dir.mkdir(parents=True, exist_ok=True)
+                    output_path = pathlib.Path(
+                        output_dir, output_name)
+
+                    # Patch rom
+                    if not input_path:
+                        input_path = roms_dict[category][rom]["rom_path"]
+
+                    if pathlib.Path(input_path).is_file():
+                        apply_patch(input_path,
+                                    patch_path, output_path)
+                        input_path = output_path
+
+                        # Clean up temporary files
+                        if count == length:
+                            tmp_glob = output_dir.glob("*.tmp")
+                            for tmp_file in tmp_glob:
+                                os.remove(tmp_file)
+                            print("Success! " + output_path.name)
+                        else:
+                            count = count + 1
 
 
 def sigint_handler(signal, frame):
