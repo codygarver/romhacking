@@ -1,7 +1,6 @@
 {
     "hacks": {
         "1186": {
-            "category": "hacks",
             "filename": [
                 "Metroid Plus.ips"
             ],
@@ -13,7 +12,6 @@
             "version": "0.3"
         },
         "1983": {
-            "category": "hacks",
             "filename": [
                 "Akuden - Logotrans (New Alucard) v7.ips"
             ],
@@ -36,7 +34,6 @@
             "version": "1.0"
         },
         "2990": {
-            "category": "hacks",
             "filename": [
                 "Wario Land II-enhanced.ips"
             ],
@@ -48,7 +45,6 @@
             "version": "1.1.8"
         },
         "3473": {
-            "category": "hacks",
             "filename": [
                 "Super Ghouls'n Ghosts Restoration.ips"
             ],
@@ -60,7 +56,6 @@
             "version": "Final"
         },
         "3588": {
-            "category": "hacks",
             "filename": [
                 "Oracle of Seasons GBC palettes.ips"
             ],
@@ -72,7 +67,6 @@
             "version": "1.0"
         },
         "3589": {
-            "category": "hacks",
             "filename": [
                 "Oracle of Ages GBC palettes.ips"
             ],
@@ -106,7 +100,6 @@
             "version": "Final"
         },
         "3764": {
-            "category": "hacks",
             "filename": [
                 "bfire_sound_restoration_1.1_us.ips"
             ],
@@ -118,7 +111,6 @@
             "version": "1.1"
         },
         "3784": {
-            "category": "hacks",
             "filename": [
                 "SML2DXv181.ips"
             ],
@@ -130,7 +122,6 @@
             "version": "1.8.1"
         },
         "4388": {
-            "category": "hacks",
             "filename": [
                 "metroid ii - color (ejrtq) v1.3.ips"
             ],
@@ -142,7 +133,6 @@
             "version": "1.3"
         },
         "4477": {
-            "category": "hacks",
             "filename": [
                 "smldx.ips"
             ],
@@ -154,7 +144,6 @@
             "version": "1.0"
         },
         "4552": {
-            "category": "hacks",
             "filename": [
                 "Macross_Scrambled Valkyrie - Overtech Edition v1.1.ips"
             ],
@@ -166,7 +155,6 @@
             "version": "1.1"
         },
         "4672": {
-            "category": "hacks",
             "filename": [
                 "Link's Awakening Redux.ips",
                 "Font Improvement.ips"
@@ -179,7 +167,6 @@
             "version": "1.3.5"
         },
         "4935": {
-            "category": "hacks",
             "filename": [
                 "Pokemon Perfect Crystal (2020 Update).ips"
             ],
@@ -191,7 +178,6 @@
             "version": "1.0"
         },
         "5213": {
-            "category": "hacks",
             "filename": [
                 "dreamLandDX.ips"
             ],
@@ -214,7 +200,6 @@
             "version": "1.0"
         },
         "5522": {
-            "category": "hacks",
             "filename": [
                 "pokegold97_v5.0.ips"
             ],
@@ -226,7 +211,6 @@
             "version": "5.0a"
         },
         "563": {
-            "category": "hacks",
             "filename": [
                 "ff5a_mus_v3.0_america.ips"
             ],
@@ -249,7 +233,6 @@
             "version": "1.0"
         },
         "6244": {
-            "category": "hacks",
             "filename": [
                 "FF1 DoS Maeson 1.3a - Higher MP 1-4.ips",
                 "Improved Equipment Stat Viewing.ips",
@@ -263,7 +246,6 @@
             "version": "1.3a"
         },
         "6479": {
-            "category": "hacks",
             "filename": [
                 "Kirby - Tilt 'n' Tumble accelerometer removal patch.ips"
             ],
@@ -275,7 +257,6 @@
             "version": "1.0"
         },
         "6541": {
-            "category": "hacks",
             "filename": [
                 "Galaga&GalaxianDX_v1.1.ips"
             ],
@@ -287,7 +268,6 @@
             "version": "1.1"
         },
         "657": {
-            "category": "hacks",
             "filename": [
                 "ff6a_sound_restoration_v2_1_us.ips"
             ],
@@ -299,7 +279,6 @@
             "version": "2.1"
         },
         "677": {
-            "category": "hacks",
             "filename": [
                 "cvhod_noglo_u.ips"
             ],
@@ -311,7 +290,6 @@
             "version": "1.1"
         },
         "969": {
-            "category": "hacks",
             "filename": [
                 "ff4_sound_restore_v13.ips"
             ],
