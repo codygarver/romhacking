@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import glob
 import hashlib
 import json
 import os
@@ -34,8 +33,9 @@ def apply_patch(rom_path, patch_path, output_path):
 
 
 def get_roms_dict(roms_dir):
-    rom_files = glob.glob(roms_dir + "/**/*.gb*", recursive=True) + \
-        glob.glob(roms_dir + "/**/*.nes", recursive=True)
+    roms_dir = pathlib.Path(roms_dir)
+    rom_files = list(roms_dir.rglob("*.gb*")) +\
+        list(roms_dir.rglob("*.nes"))
 
     # Populate roms dictionary with found files respective metadata
     roms_dict = {}
