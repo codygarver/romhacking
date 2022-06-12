@@ -34,7 +34,7 @@ def apply_patch(rom_path, patch_path, output_path):
 
 def get_roms_dict(roms_dir):
     roms_dir = pathlib.Path(roms_dir)
-    rom_files = list(roms_dir.rglob("*.gb*")) +\
+    rom_files = list(roms_dir.rglob("*.gb*")) + \
         list(roms_dir.rglob("*.nes"))
 
     # Populate roms dictionary with found files respective metadata

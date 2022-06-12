@@ -2,9 +2,9 @@
 
 from bs4 import BeautifulSoup
 import argparse
-import pathlib
 import json
 import os
+import pathlib
 import re
 import requests
 import signal
@@ -18,7 +18,6 @@ except:
 
 def get_romhacking(url):
     html = requests.get(url)
-
     soup = BeautifulSoup(html.text, "html.parser")
 
     rom_info_div = soup.find(
@@ -54,6 +53,7 @@ def get_romhacking(url):
     if args.debug:
         print(rom_info)
 
+    game = ""
     title = soup.find("meta", property="og:title")
     name = title["content"]
     name = re.sub("\/", "&", name)
@@ -92,8 +92,6 @@ def get_romhacking(url):
             print(length_error)
             exit(1)
 
-        game = ""
-
         modified = rom_info[13]
         platform = get_platform(rom_info[4])
         version = rom_info[9]
@@ -101,7 +99,7 @@ def get_romhacking(url):
     return game, name, id, modified, platform, version, sha1, category
 
 
-def sigint_handler(signal, frame):
+def sigint_handler():
     sys.exit(0)
 
 
@@ -148,9 +146,9 @@ def update():
 
     for category in patches_dict:
         for patch in patches_dict[category]:
-            local_version = patches_dict[category][patch]["version"]
-            local_date = patches_dict[category][patch]["modified"]
             game = patches_dict[category][patch]["game"]
+            local_date = patches_dict[category][patch]["modified"]
+            local_version = patches_dict[category][patch]["version"]
             name = patches_dict[category][patch]["name"]
             issue_title = "Update " + game + " " + name
             url = "https://www.romhacking.net/" + \
@@ -206,6 +204,7 @@ def tests():
                 print("Error: Missing sha1: " +
                       patches_dict[category][patch]["name"] + " (" + patch + ")")
                 fail = True
+
             # Test missing patch filename
             if len(patches_dict[category][patch]["filename"]) == 0:
                 print("Error: Missing patch filename: " + patches_dict[category][patch].get(
@@ -251,7 +250,6 @@ def tests():
 signal.signal(signal.SIGINT, sigint_handler)
 
 if __name__ == "__main__":
-
     # Configure argparse
     description = "Manage rom hacks and check for updates"
     parser = argparse.ArgumentParser(
