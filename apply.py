@@ -45,22 +45,22 @@ def get_roms_dict(roms_dir):
                 "rom_path": pathlib.Path(rom_path).as_posix(),
             }})
 
-    patches_dict_copy = patches_dict.copy()
+    patches_dict_with_roms = patches_dict.copy()
 
     for category in patches_dict:
         for patch in patches_dict[category]:
             for hash in roms_dict:
                 if patches_dict[category][patch]["sha1"].upper() == hash.upper():
                     rom_path = roms_dict[hash]["rom_path"]
-                    patches_dict_copy[category][patch]["rom_path"] = rom_path
-                    patches_dict_copy[category][patch]["extension"] = pathlib.Path(
+                    patches_dict_with_roms[category][patch]["extension"] = pathlib.Path(
                         rom_path).suffix
-                    patches_dict_copy[category][patch]["rom_filename"] = pathlib.Path(
+                    patches_dict_with_roms[category][patch]["rom_filename"] = pathlib.Path(
                         rom_path).name
+                    patches_dict_with_roms[category][patch]["rom_path"] = rom_path
 
-    #print(json.dumps(patches_dict_copy, sort_keys=True, indent=4))
+    #print(json.dumps(patches_dict_with_roms, sort_keys=True, indent=4))
 
-    return patches_dict_copy
+    return patches_dict_with_roms
 
 
 def patch_roms():
@@ -70,21 +70,23 @@ def patch_roms():
         for rom in roms_dict[category]:
             # Only patch roms with matching patch
             if roms_dict[category][rom]["filename"] and "rom_path" in roms_dict[category][rom]:
-                count = 1
-                length = len(roms_dict[category][rom]["filename"])
                 input_path = ""
+                patch_count_current = 1
+                patch_count_total = len(roms_dict[category][rom]["filename"])
+
                 for path in roms_dict[category][rom]["filename"]:
                     # Input patch
                     patch_path = pathlib.Path(args.patches_dir, path)
 
-                    if count == length:
+                    if patch_count_current == patch_count_total:
+                        extension = roms_dict[category][rom]["extension"]
                         game = roms_dict[category][rom]["game"]
                         name = roms_dict[category][rom]["name"]
                         version = roms_dict[category][rom]["version"]
-                        extension = roms_dict[category][rom]["extension"]
                         output_name = game + ": " + name + " patched " + version + extension
                     else:
-                        output_name = "output" + str(count) + ".tmp"
+                        output_name = "output" + \
+                            str(patch_count_current) + ".tmp"
 
                     # Output patched rom
                     output_dir = pathlib.Path(
@@ -103,13 +105,13 @@ def patch_roms():
                         input_path = output_path
 
                         # Clean up temporary files
-                        if count == length:
+                        if patch_count_current == patch_count_total:
                             tmp_glob = output_dir.glob("*.tmp")
                             for tmp_file in tmp_glob:
                                 os.remove(tmp_file)
                             print("Success! " + output_path.name)
                         else:
-                            count += 1
+                            patch_count_current += 1
 
 
 def sigint_handler():
