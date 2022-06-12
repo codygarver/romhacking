@@ -65,6 +65,7 @@ def get_roms_dict(roms_dir):
 
 def patch_roms():
     roms_dict = get_roms_dict(args.roms_dir)
+
     for category in roms_dict:
         for rom in roms_dict[category]:
             # Only patch roms with matching patch
@@ -75,6 +76,7 @@ def patch_roms():
                 for path in roms_dict[category][rom]["filename"]:
                     # Input patch
                     patch_path = pathlib.Path(args.patches_dir, path)
+
                     if count == length:
                         game = roms_dict[category][rom]["game"]
                         name = roms_dict[category][rom]["name"]
@@ -83,6 +85,7 @@ def patch_roms():
                         output_name = game + ": " + name + " patched " + version + extension
                     else:
                         output_name = "output" + str(count) + ".tmp"
+
                     # Output patched rom
                     output_dir = pathlib.Path(
                         args.output_dir, roms_dict[category][rom]["platform"])
@@ -106,10 +109,10 @@ def patch_roms():
                                 os.remove(tmp_file)
                             print("Success! " + output_path.name)
                         else:
-                            count = count + 1
+                            count += 1
 
 
-def sigint_handler(signal, frame):
+def sigint_handler():
     sys.exit(0)
 
 
