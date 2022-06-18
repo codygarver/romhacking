@@ -62,7 +62,9 @@ def get_romhacking(url):
 
     def get_platform(platform):
         platform = platform.lower()
-        if platform == "nintendo entertainment system":
+        if platform == "nintendo ds":
+            platform = "nds"
+        elif platform == "nintendo entertainment system":
             platform = "nes"
         elif platform == "playstation portable":
             platform = "psp"
