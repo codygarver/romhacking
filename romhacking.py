@@ -53,7 +53,6 @@ def get_romhacking(url):
     if args.debug:
         print(rom_info)
 
-    game = ""
     title = soup.find("meta", property="og:title")
     name = title["content"]
     name = re.sub("\/", "&", name)
@@ -94,6 +93,8 @@ def get_romhacking(url):
             print(length_error)
             exit(1)
 
+        # game is first string before linebreak
+        game = rom_info[0].strip().split("\n")[0]
         modified = rom_info[13]
         platform = get_platform(rom_info[4])
         version = rom_info[9]
