@@ -72,10 +72,10 @@ def get_romhacking(url):
 
         return platform
 
-    length_error = "Error: rom info too short, bad page?"
+    length_error = "Error: " + url + " rom info too short, bad page?"
 
     if category == "hacks":
-        if len(rom_info) != 12:
+        if len(rom_info) != 13:
             print(length_error)
             exit(1)
 
@@ -84,20 +84,20 @@ def get_romhacking(url):
         game = re.sub("\u00e9", "e", game)  # Pokémon to Pokemon
         game = re.sub("\u2019", "\'", game)  # '
 
-        modified = rom_info[11]
+        modified = rom_info[12]
         platform = get_platform(rom_info[3])
-        version = rom_info[7]
+        version = rom_info[8]
 
     if category == "translations":
-        if len(rom_info) != 14:
+        if len(rom_info) != 15:
             print(length_error)
             exit(1)
 
         # game is first string before linebreak
         game = rom_info[0].strip().split("\n")[0]
-        modified = rom_info[13]
+        modified = rom_info[14]
         platform = get_platform(rom_info[4])
-        version = rom_info[9]
+        version = rom_info[10]
 
     return game, name, id, modified, platform, version, sha1, category
 
